@@ -1,0 +1,16 @@
+<div class="project">
+	<h3>
+		{{ .Params.title }}
+	</h3>
+	<a href="{{ .Params.demo }}" target="_blank">
+		<div>
+			<img src="/img/projects/{{ (print .File.BaseFileName ".jpg") }}" alt="screenshot">
+		</div>
+	</a>
+	<p>{{ .Params.description }}</p>
+	<hr>
+	<p class="date">- Completed: {{ dateFormat "Jan 2, 2006" .Params.completed }}</p>
+	{{ with .Params.source }}
+		<a class="source" target="_blank" href="{{ . }}">Source Code</a>
+	{{ end }}
+</div>

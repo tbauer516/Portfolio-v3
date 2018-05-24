@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+{{ partial "head.html" }}
+
+<body>
+	<input type="checkbox" id="nav-trigger">
+	<div id="top">
+		<a href="#title" class="nav">{{ $.Params.top }}</a>
+		<label for="nav-trigger">&#9776;</label>
+	</div>
+
+	<div id="sidebar">
+		<nav>
+			<ul>
+				{{ range $index, $sec := $.Params.sections }}
+					<li><a href="#{{ $sec }}{{ $index }}">{{ index $.Params.titles $index }}</a></li>
+				{{ end }}
+			</ul>
+		</nav>
+	</div>
+
+	<div id="main">
+		<div class="section">
+			<span id="title" tabindex="-1"></span>
+			<div id="bg-img"></div>
+			<h1>{{ $.Params.name }}</h1>
+		</div>
+
+		
+
+		{{ range $index, $section := $.Params.sections }}
+			<div class="section {{ $section }}">
+				<span id="{{ $section }}{{ $index }}" tabindex="-1"></span>
+				
+					{{ if eq (len (where $.Site.RegularPages "Section" $section)) 0 }}
+						{{ range (where $.Site.RegularPages ".File.BaseFileName" $section) }}
+							<h2>
+								{{ .Params.title }}
+							</h2>
+							<div class="body">
+								{{ partial (print "section/" $section ".html") . }}
+							</div>
+						{{ end }}
+					{{ else }}
+						{{ range (where (where $.Site.Pages "Section" $section) "Kind" "!=" "page") }}
+							{{ $.Scratch.Set "field" .Params.field }}
+							<h2>
+								{{ .Params.title }}
+							</h2>
+							<div class="body">
+						{{ end }}
+
+						{{ range (where (where $.Site.RegularPages "Section" $section) (print ".Params." ($.Scratch.Get "field")) nil) }}
+							{{ partial (print "element/" $section ".html") . }}
+						{{ end }}
+
+						{{ range (sort (where (where $.Site.RegularPages "Section" $section) (print ".Params." ($.Scratch.Get "field")) "!=" nil) (print ".Params." ($.Scratch.Get "field")) "desc")}}
+							{{ partial (print "element/" $section ".html") . }}
+						{{ end }}
+
+						</div>
+
+					{{ end }}
+			</div>
+		{{ end }}
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<div><img src="/img/profile/{{ .Params.imgSrc }}" alt="{{ .Params.imgAlt }}"></div>
+<div>
+	<div>
+		<ul>
+			<li>Date of Birth:</li>
+			<li>Education:</li>
+			<li>Degree:</li>
+		</ul>
+	</div>
+	<div>
+		<ul>
+			<li>{{ dateFormat "Jan 02 2006" .Params.dob }}</li>
+			<li>{{ .Params.school }}</li>
+			<li>{{ .Params.degree }}</li>
+		</ul>
+	</div>
+	<hr>
+	<div>
+		<p>Skills:</p>
+		<ul>
+			{{ range .Params.skills }}
+			<li>{{- . -}}</li>
+			{{ end }}
+		</ul>
+	</div>
+	<div>
+		<p>Languages:</p>
+		<ul>
+			{{ range .Params.languages }}
+			<li>{{- . -}}</li>
+			{{ end }}
+		</ul>
+	</div>
+</div>

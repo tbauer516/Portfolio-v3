@@ -1,0 +1,17 @@
+{{ $startF := .Params.start }}
+{{ $startF := (cond (eq (len $startF) 10) $startF (print $startF "-01")) }}
+{{ $startF := dateFormat "Jan 2006" $startF }}
+
+{{ $endF := cond (isset .Params "end") .Params.end "2000-01-01" }}
+{{ $endF := (cond (eq (len $endF) 10) $endF (print $endF "-01")) }}
+{{ $endF := dateFormat "Jan 2006" $endF }}
+{{ $endF := cond (isset .Params "end") $endF "current" }}
+
+<div>
+	<h3>
+		{{ .Params.company }}
+	</h3>
+	<p>{{ .Params.title }}</p>
+	<p>{{ $startF }} - {{ $endF }}</p>
+	<p>{{ .Params.description }}</p>
+</div>
