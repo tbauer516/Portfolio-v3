@@ -4,7 +4,7 @@
 	</h3>
 	<a href="{{ .Params.demo }}" target="_blank">
 		<div>
-			<img src="/img/projects/{{ (print .File.BaseFileName ".jpg") }}" alt="screenshot">
+			<img src="/img/projects/{{ .Params.img }}" alt="screenshot">
 		</div>
 	</a>
 	<p>{{ .Params.description }}</p>

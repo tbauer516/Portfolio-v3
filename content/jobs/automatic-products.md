@@ -1,7 +1,0 @@
-+++
-company = "Automatic Products"
-title = "Web Developer"
-start = "2016-08"
-# end = "current"
-Description = "Automatic Products hired me on as a temporary web developer to revamp their current website. This includes a full rework of the organization, structure and functionality that the old site provides. Specifically, the new site is built upon PHP for both email forms and reusing HTML. The other big improvement is the ability for the website to be responsive to their mobile users."
-+++

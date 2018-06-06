@@ -1,7 +1,7 @@
-+++
 title = "About Me"
-imgSrc = "profile.jpg"
-imgAlt = "headshot of Tyler Bauer"
+section = "about-me"
+imgsrc = "profile.jpg"
+imgalt = "headshot of Tyler Bauer"
 dob = "1995-05-16"
 school = "University of Washington"
 degree = "Bachelor's of Science in Informatics"
@@ -21,4 +21,3 @@ languages = [
 	"Python",
 	"R"
 ]
-+++

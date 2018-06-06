@@ -32,36 +32,24 @@
 		{{ range $index, $section := $.Params.sections }}
 			<div class="section {{ $section }}">
 				<span id="{{ $section }}{{ $index }}" tabindex="-1"></span>
-				
-					{{ if eq (len (where $.Site.RegularPages "Section" $section)) 0 }}
-						{{ range (where $.Site.RegularPages ".File.BaseFileName" $section) }}
-							<h2>
-								{{ .Params.title }}
-							</h2>
-							<div class="body">
-								{{ partial (print "section/" $section ".html") . }}
-							</div>
+				<h2>
+					{{ if isset (index $.Site.Data $section) "_index" }}
+						{{ (index $.Site.Data $section)._index.title }}
+					{{ else }}
+						{{ (index $.Site.Data $section).title }}
+					{{ end }}
+				</h2>
+				<div class="body">
+					{{ if (isset (index $.Site.Data $section) "_index" ) }}
+						{{ range (sort (index $.Site.Data $section) (index $.Site.Data $section)._index.field "desc") }}
+							{{ if (ne .type "index") }}
+								{{ partial (print "element/" $section ".html") (dict "Params" . ) }}
+							{{ end }}
 						{{ end }}
 					{{ else }}
-						{{ range (where (where $.Site.Pages "Section" $section) "Kind" "!=" "page") }}
-							{{ $.Scratch.Set "field" .Params.field }}
-							<h2>
-								{{ .Params.title }}
-							</h2>
-							<div class="body">
-						{{ end }}
-
-						{{ range (where (where $.Site.RegularPages "Section" $section) (print ".Params." ($.Scratch.Get "field")) nil) }}
-							{{ partial (print "element/" $section ".html") . }}
-						{{ end }}
-
-						{{ range (sort (where (where $.Site.RegularPages "Section" $section) (print ".Params." ($.Scratch.Get "field")) "!=" nil) (print ".Params." ($.Scratch.Get "field")) "desc")}}
-							{{ partial (print "element/" $section ".html") . }}
-						{{ end }}
-
-						</div>
-
+						{{ partial (print "section/" $section ".html") (dict "Params" (index $.Site.Data $section)) }}
 					{{ end }}
+				</div>
 			</div>
 		{{ end }}
 

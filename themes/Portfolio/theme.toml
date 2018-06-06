@@ -3,13 +3,13 @@
 
 name = "Portfolio"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE.md"
-description = ""
-homepage = "http://siteforthistheme.com/"
+licenselink = "https://github.com/tbauer516/Portfolio-v3/blob/master/LICENSE"
+description = "Portfolio page for Tyler Bauer, a passionate software developer"
+homepage = "https://tylerbauer.info"
 tags = ["", ""]
 features = ["", ""]
 min_version = 0.15
 
 [author]
-  name = ""
-  homepage = ""
+  name = "Tyler Bauer"
+  homepage = "https://tylerbauer.info"
